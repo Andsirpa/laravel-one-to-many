@@ -46,6 +46,22 @@
                 </div>
 
                 <div class="col-12">
+                    <label for="type_id" class="form-label">Type</label>
+                    <select name="type_id" id="type_id" class='form-select @error('type_id') is-invalid @enderror'>
+                        <option value="" class="d-none">Select a Type</option>
+                        @foreach ($types as $type)
+                            <option value="{{ $type->id }}"
+                                {{ $type->id == old('type_id', $project->type_id) ? 'selected' : '' }}>
+                                {{ $type->type }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('type_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col-12">
                     <label for="description" class="form-label">Description</label>
                     <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
                         rows="3">{{ $errors->any() ? old('description') : $project->description }}</textarea>

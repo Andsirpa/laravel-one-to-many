@@ -27,7 +27,8 @@ class CreateProjectRequest extends FormRequest
             'title' => 'required|string|max:100',
             'author' => 'required|string|max:100',
             'description' => 'string|nullable',
-            'project_link' => 'required|url'
+            'project_link' => 'required|url',
+            'type_id' => 'nullable|exists:types,id'
         ];
     }
 
