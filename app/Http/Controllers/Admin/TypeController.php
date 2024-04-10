@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\CreateTypeRequest;
+use App\Http\Requests\EditTypeRequest;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,16 +34,16 @@ class TypeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      */
-    public function store(Request $request)
+    public function store(CreateTypeRequest $request)
     {
+        $request->validated();
         $data = $request->all();
         $new_type = new Type;
         $new_type->fill($data);
         $new_type->save();
 
-        return redirect()->route('admin.types.show', $new_type);
+        return redirect()->route('admin.types.show', $new_type)->with('message', 'Tipologia creata con successo');
     }
-
     /**
      * Display the specified resource.
      *
@@ -68,11 +70,15 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Type  $type
      */
-    public function update(Request $request, Type $type)
+
+    public function update(EditTypeRequest $request, Type $type)
     {
+        $request->validated();
+
         $data = $request->all();
         $type->update($data);
-        return redirect()->route('admin.types.show', compact('type'));
+
+        return redirect()->route('admin.types.show', compact('type'))->with('message', 'Tipologia modificata con successo');
     }
 
     /**
