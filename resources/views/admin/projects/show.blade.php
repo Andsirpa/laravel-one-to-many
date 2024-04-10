@@ -16,6 +16,8 @@
         <h1 class="mt-3 fw-bold">{{ $project->title }}</h1>
         <span class="d-inline-block me-2">Created By</span><code class="d-inline-block fs-5">{{ $project->author }}</code>
 
+        <span class="mt-4 fs-5 fw-bold d-block">Type: {!! $project->type->getBadge() !!}</span>
+
         <span class="mt-4 fs-5 fw-bold d-block">Description:</span>
         <p>{{ $project->description }}</p>
 
